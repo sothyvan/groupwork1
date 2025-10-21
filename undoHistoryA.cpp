@@ -16,53 +16,50 @@ class Node{
         }
 };
 
-class SLL{
+class LinkedlistUndoHistory{
     private:
-        Node *head, *tail;
+        Node *head;
         int counter;
-    
     public:
         //Constructor
-        SLL(){
+        LinkedlistUndoHistory(){
             head = nullptr;
-            tail = nullptr;
             counter = 0;
         }
-        // Destructor
-        ~SLL() {
-            while (head != nullptr) {
-                Node* temp = head;
+        //Destructor
+        ~LinkedlistUndoHistory(){
+            while(head != nullptr){
+                Node *temp = head;
                 head = head->next;
                 delete temp;
             }
-            counter = 0;
         }
 
-        //recent items (SLL)
-        void insertItemFront(int value){
-            Node* newNode = new Node{value};
-            newNode->next = head;
-            head = newNode;
-
-            //if the list is empty
-            if(tail == nullptr){
-                tail = newNode;
-            }
+        void addAction(int value){
+            Node* new_node = new Node{value};
+            new_node->next = head;
+            head = new_node;
             counter++;
         }
-        void removeItemFront(){
-            if (head == nullptr){
-                cout << "Empty!";
+
+        void undo(){
+            if(head == nullptr){
+                cout << "Empty!\n";
                 return;
             }
-            Node *cur = head;
+
+            Node *temp = head;
             head = head->next;
-            delete cur;
+            delete temp;
             counter--;
+        }
+
+        int size(){
+            return counter;
         }
 };
 
-void SLL_observe(SLL* obj, void (SLL::*method)(), string msg){
+void LinkedlistUndoHistory_observe(LinkedlistUndoHistory* obj, void (LinkedlistUndoHistory::*method)(), string msg){
     auto t0 = clk::now();
 
     (obj->*method)(); // perform operation
@@ -71,4 +68,9 @@ void SLL_observe(SLL* obj, void (SLL::*method)(), string msg){
 
     auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
     cout<<msg <<": "<<duration.count() <<" nanosecond(s)" <<endl;
+}
+
+int main(){
+    
+    return 0;
 }
