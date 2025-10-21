@@ -35,6 +35,30 @@ class SLL{
                 head = head->next;
                 delete temp;
             }
+            counter = 0;
+        }
+
+        //recent items (SLL)
+        void insertItemFront(int value){
+            Node* newNode = new Node{value};
+            newNode->next = head;
+            head = newNode;
+
+            //if the list is empty
+            if(tail == nullptr){
+                tail = newNode;
+            }
+            counter++;
+        }
+        void removeItemFront(){
+            if (head == nullptr){
+                cout << "Empty";
+                return;
+            }
+            Node *cur = head;
+            head = head->next;
+            delete cur;
+            counter--;
         }
 };
 

@@ -22,24 +22,55 @@ class DLL{
     private:
         doublyNode *head;
         doublyNode *tail;
+        int counter;
 
     public:
         //Constructor
         DLL(){
             head = nullptr;
             tail = nullptr;
+            counter = 0;
         }
         //Destructor
         ~DLL(){
             doublyNode *cur = head;
             
             while(cur != nullptr){
-                doublyNode *temp = head;
-                cur = head->next;
+                doublyNode *temp = cur;
+                cur = cur->next;
                 delete temp;
             }
             head = nullptr;
             tail = nullptr;
+            counter = 0;
+        }
+
+        //recent items (DLL)
+        void insertItemFront(int value){
+            doublyNode *new_node = new doublyNode{value};
+            if (head != nullptr){
+                new_node->next = head;
+                head->prev = new_node;
+            } else {
+                tail = new_node;
+            }
+            head = new_node;
+            counter++;
+        }
+        void removeItemFront(){
+            if (head == nullptr){
+                cout << "Empty!";
+                return;
+            }
+            doublyNode *temp = head;
+            head = head->next;
+            if (head != nullptr){
+                head->prev = nullptr;
+            } else {
+                tail = nullptr;
+            }
+            delete temp;
+            counter--;
         }
 };
 

@@ -33,8 +33,8 @@ class cSLL{
             tail->next = nullptr;
 
             while (cur != nullptr){
-                circularNode *temp = head;
-                cur = head->next;
+                circularNode *temp = cur;
+                cur = cur->next;
                 delete temp;
             }
             head = nullptr;

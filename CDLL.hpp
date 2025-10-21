@@ -37,8 +37,8 @@ class cDLL{
             head->prev = nullptr;
             
             while(cur != nullptr){
-                circularDNode *temp = head;
-                cur = head->next;
+                circularDNode *temp = cur;
+                cur = cur->next;
                 delete temp;
             }
             head = nullptr;
