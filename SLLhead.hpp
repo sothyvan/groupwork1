@@ -27,6 +27,14 @@ class SLLh{
             head = nullptr;
             counter = 0;
         }
+        // Destructor
+        ~SLLh() {
+            while (head != nullptr) {
+                Node* temp = head;
+                head = head->next;
+                delete temp;
+            }
+        }
         //method
          // Insert at front
         void push_front(int val){
@@ -102,15 +110,6 @@ class SLLh{
                 current = current->next;
             }
             cout << " -> nullptr" << endl;
-        }
-
-        // Destructor
-        ~SLLh() {
-            while (head != nullptr) {
-                Node* temp = head;
-                head = head->next;
-                delete temp;
-            }
         }
 };
 

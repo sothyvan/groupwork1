@@ -28,6 +28,15 @@ class SLL{
             tail = nullptr;
             counter = 0;
         }
+        // Destructor
+        ~SLL() {
+            while (head != nullptr) {
+                Node* temp = head;
+                head = head->next;
+                delete temp;
+            }
+            counter = 0;
+        }
         //method
          // Insert at front
         void push_front(int val){
@@ -119,16 +128,6 @@ class SLL{
             cout << " -> nullptr" << endl;
             
             cout << "Head: " << (head ? head->data : -1) << ", Tail: " << (tail ? tail->data : -1) << endl;
-        }
-
-        // Destructor
-        ~SLL() {
-            while (head != nullptr) {
-                Node* temp = head;
-                head = head->next;
-                delete temp;
-            }
-            counter = 0;
         }
 
         //recent items (SLL)
