@@ -34,12 +34,39 @@ class DLL{
             doublyNode *cur = head;
             
             while(cur != nullptr){
-                doublyNode *temp = head;
-                cur = head->next;
+                doublyNode *temp = cur;
+                cur = cur->next;
                 delete temp;
             }
             head = nullptr;
             tail = nullptr;
+        }
+
+        void eraseNode(doublyNode* node){
+            if(node == nullptr){
+                return;     
+            }
+            if(node == head){
+                head = node->next;
+                if(head != nullptr){
+                    head->prev = nullptr;
+                } else {
+                    tail = nullptr;
+                }
+            }
+            else if(node == tail){
+                tail = node->prev;
+                if(tail != nullptr){
+                    tail->next = nullptr;;
+                } else {
+                    head = nullptr;
+                }
+            }
+            else{
+                node->prev->next = node->next;
+                node->next->prev = node->prev;
+            }
+            delete node;
         }
 };
 
