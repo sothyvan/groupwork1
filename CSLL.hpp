@@ -1,5 +1,7 @@
 #include <iostream>
 #include <chrono>
+#ifndef CSLL_HPP
+#define CSLL_HPP
 
 using namespace std;
 using clk = std::chrono::high_resolution_clock;
@@ -52,3 +54,4 @@ void cSLL_observe(cSLL* obj, void (cSLL::*method)(), string msg){
     auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
     cout<<msg <<": "<<duration.count() <<" nanosecond(s)" <<endl;
 }
+#endif

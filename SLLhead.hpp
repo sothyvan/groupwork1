@@ -1,16 +1,18 @@
 #include <iostream>
 #include <chrono>
+#ifndef SLLHEAD_HPP
+#define SLLHEAD_HPP
 
 using namespace std;
 using clk = std::chrono::high_resolution_clock;
 
-class Node{
+class hNode{
     public:
         int data;
-        Node* next;
+        hNode* next;
 
         //Constructor
-        Node(int value){
+        hNode(int value){
             data = value;
             next = nullptr;
         }
@@ -18,7 +20,7 @@ class Node{
 
 class SLLh{
     private:
-        Node *head;
+        hNode *head;
         int counter;
     
     public:
@@ -30,7 +32,7 @@ class SLLh{
         // Destructor
         ~SLLh() {
             while (head != nullptr) {
-                Node* temp = head;
+                hNode* temp = head;
                 head = head->next;
                 delete temp;
             }
@@ -38,7 +40,7 @@ class SLLh{
         //method
          // Insert at front
         void push_front(int val){
-            Node *newNode = new Node(val);
+            hNode *newNode = new hNode(val);
             newNode->next = head;
             head = newNode;
             counter++;
@@ -46,12 +48,12 @@ class SLLh{
         
         // Insert at back
         void push_back(int val){
-            Node *newNode = new Node(val);
+            hNode *newNode = new hNode(val);
             
             if (head == nullptr) {
                 head = newNode;
             } else {
-                Node* current = head;
+                hNode* current = head;
                 while (current->next != nullptr) {
                     current = current->next;
                 }
@@ -67,7 +69,7 @@ class SLLh{
                 return;
             }
             
-            Node* temp = head;
+            hNode* temp = head;
             head = head->next;
             delete temp;
             counter--;
@@ -84,7 +86,7 @@ class SLLh{
                 delete head;
                 head = nullptr;
             } else {
-                Node* current = head;
+                hNode* current = head;
                 while (current->next->next != nullptr) {
                     current = current->next;
                 }
@@ -101,7 +103,7 @@ class SLLh{
                 return;
             }
             
-            Node* current = head;
+            hNode* current = head;
             while (current != nullptr) {
                 cout << current->data;
                 if (current->next != nullptr) {
@@ -123,3 +125,4 @@ void SLLh_observe(SLLh* obj, void (SLLh::*method)(), string msg){
     auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
     cout<<msg <<": "<<duration.count() <<" nanosecond(s)" <<endl;
 }
+#endif
