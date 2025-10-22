@@ -173,7 +173,7 @@ class DLL{
         }
         
         // Display the list from front to back
-        void display_forward() {
+        void display() {
             if (head == nullptr) {
                 cout << "List is empty" << endl;
                 return;
@@ -193,24 +193,7 @@ class DLL{
             cout << "Head: " << (head ? head->data : -1) << ", Tail: " << (tail ? tail->data : -1) << endl;
         }
         
-        // Display the list from back to front
-        void display_backward() {
-            if (tail == nullptr) {
-                cout << "List is empty" << endl;
-                return;
-            }
-            
-            doublyNode* current = tail;
-            cout << "nullptr <- ";
-            while (current != nullptr) {
-                cout << current->data;
-                if (current->prev != nullptr) {
-                    cout << " <-> ";
-                }
-                current = current->prev;
-            }
-            cout << " -> nullptr" << endl;
-        }
+        
 
 };
 
