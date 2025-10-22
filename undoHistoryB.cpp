@@ -1,8 +1,6 @@
 #include <iostream>
-#include <chrono>
 
 using namespace std;
-using clk = std::chrono::high_resolution_clock;
 
 class DynamicArray{
     private:
@@ -65,17 +63,6 @@ class DynamicArray{
             return size;
         }
 };
-
-void DynamicArray_observe(DynamicArray* obj, void (DynamicArray::*method)(), string msg){
-    auto t0 = clk::now();
-
-    (obj->*method)(); // perform operation
-
-    auto t1 = clk::now();
-
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
-    cout<<msg <<": "<<duration.count() <<" nanosecond(s)" <<endl;
-}
 
 int main(){
     

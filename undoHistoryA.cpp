@@ -1,8 +1,6 @@
 #include <iostream>
-#include <chrono>
 
 using namespace std;
-using clk = std::chrono::high_resolution_clock;
 
 class Node{
     public:
@@ -58,17 +56,6 @@ class LinkedlistUndoHistory{
             return counter;
         }
 };
-
-void LinkedlistUndoHistory_observe(LinkedlistUndoHistory* obj, void (LinkedlistUndoHistory::*method)(), string msg){
-    auto t0 = clk::now();
-
-    (obj->*method)(); // perform operation
-
-    auto t1 = clk::now();
-
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
-    cout<<msg <<": "<<duration.count() <<" nanosecond(s)" <<endl;
-}
 
 int main(){
     
