@@ -39,6 +39,15 @@ class SLL{
             }
             counter = 0;
         }
+        void traverse(int n) {
+            Node* cur = head;
+            for (int i = 0; i < n; ++i) {
+                if (cur == nullptr){
+                    cur = head; // manual reset
+                }
+                cur = cur->next;
+            }
+        }
         //method
          // Insert at front
         void push_front(int val){
