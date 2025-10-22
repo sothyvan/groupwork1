@@ -1,5 +1,7 @@
 #include <iostream>
 #include <chrono>
+#ifndef SLL_HPP
+#define SLL_HPP
 
 using namespace std;
 using clk = std::chrono::high_resolution_clock;
@@ -26,6 +28,15 @@ class SLL{
         SLL(){
             head = nullptr;
             tail = nullptr;
+            counter = 0;
+        }
+        // Destructor
+        ~SLL() {
+            while (head != nullptr) {
+                Node* temp = head;
+                head = head->next;
+                delete temp;
+            }
             counter = 0;
         }
         //method
@@ -121,16 +132,6 @@ class SLL{
             cout << "Head: " << (head ? head->data : -1) << ", Tail: " << (tail ? tail->data : -1) << endl;
         }
 
-        // Destructor
-        ~SLL() {
-            while (head != nullptr) {
-                Node* temp = head;
-                head = head->next;
-                delete temp;
-            }
-            counter = 0;
-        }
-
         //recent items (SLL)
         void insertItemFront(int value){
             Node* newNode = new Node{value};
@@ -165,3 +166,4 @@ void SLL_observe(SLL* obj, void (SLL::*method)(), string msg){
     auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
     cout<<msg <<": "<<duration.count() <<" nanosecond(s)" <<endl;
 }
+#endif

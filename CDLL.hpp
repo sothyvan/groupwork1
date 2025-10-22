@@ -1,5 +1,7 @@
 #include <iostream>
 #include <chrono>
+#ifndef CDLL_HPP
+#define CDLL_HPP
 
 using namespace std;
 using clk = std::chrono::high_resolution_clock;
@@ -44,6 +46,26 @@ class cDLL{
             head = nullptr;
             tail = nullptr;
         }
+        void insertEnd(int value) {
+            circularDNode* newNode = new circularDNode(value);
+            if (!head) {
+                head = newNode;
+                tail = newNode;
+                head->next = head;
+                head->prev = head;
+                return;
+            }
+            newNode->prev = tail;
+            newNode->next = head;
+            tail->next = newNode;
+            head->prev = newNode;
+            tail = newNode;
+        }
+        void fillList() {
+            for (int i = 1; i <= 100; i++) {
+                insertEnd(i);
+            }
+        }
 };
 
 void cDLL_observe(cDLL* obj, void (cDLL::*method)(), string msg){
@@ -55,4 +77,5 @@ void cDLL_observe(cDLL* obj, void (cDLL::*method)(), string msg){
 
     auto duration = chrono::duration_cast<chrono::nanoseconds>(t1 - t0);
     cout<<msg <<": "<<duration.count() <<" nanosecond(s)" <<endl;
-} 
+}
+#endif  
